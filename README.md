@@ -6,6 +6,7 @@ Description
 * Needed python version >= 3.6 (cause of new f-strings)
 
 ## Versions
+Script version - 1.0
 * gis_ru.py - russian lang version
 * gis_en.py - english lang version
 
