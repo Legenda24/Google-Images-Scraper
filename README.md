@@ -12,5 +12,7 @@ Description
 
 ##  Installation
 You can install required modules comfortably with pip:
-```pip install -r requirements.txt```
+```
+pip install -r requirements.txt
+```
 
