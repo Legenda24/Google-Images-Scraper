@@ -2,7 +2,7 @@
 Description
 ------------------------
 * Original author: Legendax24 (legenda24)
-* Script to scrape images from google
+* Script to scrape images from google search
 * Needed python version >= 3.6 (cause of new f-strings)
 
 ## Versions
@@ -15,4 +15,3 @@ You can install required modules comfortably with pip:
 ```
 pip install -r requirements.txt
 ```
-
