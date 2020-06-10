@@ -1,9 +1,10 @@
 __author__ = "legendax24"
-__version__ = "1.1"
+__version__ = "1.2"
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 from tqdm import tqdm
 import requests
+import os
 
 
 def get_query_settings():
@@ -99,6 +100,13 @@ def get_query_settings():
 
 def create_urls():
     query = input('Enter query: ')
+
+    try:
+        os.mkdir(query)
+        os.chdir(query)
+    except FileExistsError:
+        os.chdir(query)
+
     url = f"https://www.google.com/search?q={query}&tbm=isch&tbs="
     query_settings = get_query_settings()
     query_settings = list(filter(None, query_settings))
@@ -148,7 +156,14 @@ def download_images():
 
         try:
             response = requests.get(img_link, headers={'User-Agent': UserAgent().chrome})
+
             filename = img_link.split('/')[-1]
+            extensions = ['.jpg', '.png', '.gif', '.webp', '.bmp', '.ico', '.raw', '.svg']
+            for extension in extensions:
+                if extension in filename:
+                    filename = filename.split(extension)[0]+extension
+                    break
+
             with open(filename, "wb") as out:
                 out.write(response.content)
                 print(f'Completed file #{num+1} ====>', filename)
