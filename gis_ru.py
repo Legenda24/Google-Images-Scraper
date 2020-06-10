@@ -1,7 +1,8 @@
 __author__ = "legendax24"
-__version__ = "1.0"
+__version__ = "1.1"
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
+from tqdm import tqdm
 import requests
 
 
@@ -71,7 +72,7 @@ def get_query_settings():
                   "RAW": "ift:raw"
                  } 
 
-    print('\nТип файла картинок:\n0. Any\n1. JPG\n2. GIF\n3. PNG\n4. BMP\n5. SVG\n6. WEBP\n7. ICO\n8. RAW')
+    print('\nТип файла картинок:\n0. Любой\n1. JPG\n2. GIF\n3. PNG\n4. BMP\n5. SVG\n6. WEBP\n7. ICO\n8. RAW')
     file_num = input('(Оставить пусто или 0 чтобы пропустить)\nНомер: ')
     if file_num == '0' or file_num == '':
         file_type = None
@@ -124,7 +125,7 @@ def get_img_links():
     urls, img_num = create_urls()
 
     img_links = []
-    for url in urls:
+    for url in tqdm(urls, desc="Парсинг ссылок", bar_format="{l_bar}{bar}| {elapsed}<{remaining}"):
         response = requests.get(url, headers={'User-Agent': "Mozilla/5.0 (Linux; U; Android 2.2; en-gb; GT-P1000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"})
         html = response.content
         soup = BeautifulSoup(html, "html.parser")

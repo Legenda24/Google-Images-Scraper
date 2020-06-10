@@ -1,8 +1,10 @@
 __author__ = "legendax24"
-__version__ = "1.0"
+__version__ = "1.1"
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
+from tqdm import tqdm
 import requests
+
 
 def get_query_settings():
     img_sizes = {"Large": "isz:l",
@@ -121,7 +123,7 @@ def get_img_links():
     urls, img_num = create_urls()
 
     img_links = []
-    for url in urls:
+    for url in tqdm(urls, desc="Scraping links", bar_format="{l_bar}{bar}| {elapsed}<{remaining}"):
         response = requests.get(url, headers={'User-Agent': "Mozilla/5.0 (Linux; U; Android 2.2; en-gb; GT-P1000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"})
         html = response.content
         soup = BeautifulSoup(html, "html.parser")
